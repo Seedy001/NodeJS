@@ -1,8 +1,11 @@
 const express = require('express');
 const app = express();
 const bodyparser = require('body-parser');
+const path = require('path');
+
 
 const stuffRoutes = require('./routes/stuff')
+const userRoutes = require('./routes/user')
 
 const PORT = process.env.PORT || 3000; 
 const mongoose = require('mongoose');
@@ -30,5 +33,7 @@ app.use((req, res, next) => {
 app.use(bodyparser.json());
 
 app.use('/api/stuff', stuffRoutes);
+app.use('/api/auth', userRoutes);
+app.use('/images', express.static(path.join(__dirname,'images')));
 
 module.exports = app;
