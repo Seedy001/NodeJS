@@ -9,6 +9,12 @@ const thingSchema = mongoose.Schema({
   imageUrl: { type: String, required: true },
   userId: { type: String, required: true },
   price: { type: Number, required: true },
-});
+  
+  },
+  { timestamps: true }
+);
+
 
 module.exports = mongoose.model('Thing', thingSchema);
+
+// ajouter la date d'ajout et list par ordre décroissant

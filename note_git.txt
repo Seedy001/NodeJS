@@ -1,4 +1,10 @@
-const thing = require('../models/thing');
+
+git add .
+git commit -m "initial commit"
+
+git push origin master
+
+
 const Thing = require('../models/thing');
 const fs = require('fs'); //Il nous donne accès aux fonctions qui nous permettent de modifier le système de fichiers, y compris aux fonctions permettant de supprimer les fichiers.
 
@@ -68,17 +74,9 @@ exports.getOneThing = (req, res, next) => {
         .catch(error => res.status(404).json({ error }));
 };
 
-exports.getAllStuff = async (req, res, next) => {
-    try {
-        const things = await Thing.find().sort({ createdAt: -1 }); // permet d'ordonner les objets sans vouloir ordonner il y'a pas les async await etc juste Thing.find()
-        // const formattedThings = things.map(thing => ({
-        //     ...thing.toObject(), // Convertir le document Mongoose en objet JavaScript pur 
-        //     createdAt: thing.createdAt // Inclure explicitement `createdAt` 
-        // }));  
-        res.status(200).json(things);
-    } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+exports.getAllStuff = (req, res, next) => {
+
+    Thing.find()
+        .then(things => res.status(200).json(things))
+        .catch(error => res.status(400).json({ error }));
 };
-
-
